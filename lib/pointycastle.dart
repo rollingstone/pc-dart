@@ -13,3 +13,4 @@ library pointycastle;
 export 'package:pointycastle/api.dart';
 export 'package:pointycastle/impl.dart';
 export 'package:pointycastle/asn1.dart';
+export 'package:pointycastle/rsa_key_helper/rsa_key_helper.dart';
