@@ -41,11 +41,11 @@ class ASN1IA5String extends ASN1Object {
       while (parser.hasNext()) {
         var ia5String = parser.nextObject() as ASN1IA5String;
         sb.write(ia5String.stringValue);
-        elements!.add(ia5String);
+        elements?.add(ia5String);
       }
       stringValue = sb.toString();
     } else {
-      stringValue = ascii.decode(valueBytes!);
+      stringValue = ascii.decode(valueBytes ?? Uint8List(0));
     }
   }
 
@@ -76,16 +76,16 @@ class ASN1IA5String extends ASN1Object {
       case ASN1EncodingRule.ENCODING_BER_CONSTRUCTED:
         valueByteLength = 0;
         if (elements == null) {
-          elements!.add(ASN1IA5String(stringValue: stringValue));
+          elements?.add(ASN1IA5String(stringValue: stringValue));
         }
         valueByteLength = _childLength(
             isIndefinite: encodingRule ==
                 ASN1EncodingRule.ENCODING_BER_CONSTRUCTED_INDEFINITE_LENGTH);
         valueBytes = Uint8List(valueByteLength!);
         var i = 0;
-        elements!.forEach((obj) {
+        elements?.forEach((obj) {
           var b = obj.encode();
-          valueBytes!.setRange(i, i + b.length, b);
+          valueBytes?.setRange(i, i + b.length, b);
           i += b.length;
         });
         break;
@@ -101,7 +101,7 @@ class ASN1IA5String extends ASN1Object {
   ///
   int _childLength({bool isIndefinite = false}) {
     var l = 0;
-    elements!.forEach((ASN1Object obj) {
+    elements?.forEach((ASN1Object obj) {
       l += obj.encode().length;
     });
     if (isIndefinite) {
@@ -117,7 +117,7 @@ class ASN1IA5String extends ASN1Object {
       sb.write(' ');
     }
     if (isConstructed!) {
-      sb.write('IA5String (${elements!.length} elem)');
+      sb.write('IA5String (${elements?.length} elem)');
       for (var e in elements!) {
         var dump = e.dump(spaces: spaces + dumpIndent);
         sb.write('\n $dump');

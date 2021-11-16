@@ -31,7 +31,7 @@ class ASN1Boolean extends ASN1Object {
   ///
   ASN1Boolean.fromBytes(Uint8List encodedBytes)
       : super.fromBytes(encodedBytes) {
-    boolValue = (valueBytes![0] == BOOLEAN_TRUE_VALUE);
+    boolValue = (valueBytes?[0] == BOOLEAN_TRUE_VALUE);
   }
 
   ///

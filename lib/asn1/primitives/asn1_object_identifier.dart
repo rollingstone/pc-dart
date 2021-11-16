@@ -42,7 +42,7 @@ class ASN1ObjectIdentifier extends ASN1Object {
     BigInt? bigValue;
     var list = <int>[];
     var sb = StringBuffer();
-    valueBytes!.forEach((element) {
+    valueBytes?.forEach((element) {
       var b = element & 0xff;
       if (value < 0x80000000000000) {
         value = value * 128 + (b & 0x7f);
