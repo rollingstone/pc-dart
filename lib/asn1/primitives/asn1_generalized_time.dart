@@ -20,7 +20,7 @@ class ASN1GeneralizedTime extends ASN1Object {
   /// Creates an [ASN1GeneralizedTime] entity from the given [encodedBytes].
   ///
   ASN1GeneralizedTime.fromBytes(Uint8List bytes) : super.fromBytes(bytes) {
-    var octets = valueBytes ?? Uint8List(0);
+    var octets = valueBytes!;
     var stringValue = ascii.decode(octets);
     var year = stringValue.substring(0, 4);
     var month = stringValue.substring(4, 6);
@@ -63,7 +63,7 @@ class ASN1GeneralizedTime extends ASN1Object {
     // Encode string to YYMMDDhhmm[ss]Z
     var utcString = '$year$month$day$hour$minute${second}Z';
     valueBytes = ascii.encode(utcString);
-    valueByteLength = valueBytes?.length;
+    valueByteLength = valueBytes!.length;
     return super.encode();
   }
 

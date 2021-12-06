@@ -30,7 +30,7 @@ class ASN1UtcTime extends ASN1Object {
   ///
   ASN1UtcTime.fromBytes(Uint8List encodedBytes)
       : super.fromBytes(encodedBytes) {
-    var stringValue = ascii.decode(valueBytes ?? Uint8List(0));
+    var stringValue = ascii.decode(valueBytes!);
     var formatedStringValue = _format(stringValue);
     time = DateTime.parse(formatedStringValue);
   }
@@ -61,7 +61,7 @@ class ASN1UtcTime extends ASN1Object {
     // Encode string to YYMMDDhhmm[ss]Z
     var utcString = '$year$month$day$hour$minute${second}Z';
     valueBytes = ascii.encode(utcString);
-    valueByteLength = valueBytes?.length;
+    valueByteLength = valueBytes!.length;
     return super.encode();
   }
 

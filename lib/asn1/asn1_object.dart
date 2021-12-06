@@ -85,7 +85,7 @@ class ASN1Object {
     if (encodedBytes == null) {
       // Encode the length
       Uint8List lengthAsBytes;
-      valueByteLength ??= valueBytes?.length;
+      valueByteLength ??= valueBytes!.length;
       // Check if we have indefinite length or fixed length (short or longform)
       if (encodingRule ==
           ASN1EncodingRule.ENCODING_BER_CONSTRUCTED_INDEFINITE_LENGTH) {
@@ -105,8 +105,8 @@ class ASN1Object {
       // Set the length bytes
       encodedBytes!.setRange(1, 1 + lengthAsBytes.length, lengthAsBytes, 0);
       // Set the value bytes
-      encodedBytes!.setRange(1 + lengthAsBytes.length, encodedBytes!.length,
-          valueBytes ?? Uint8List(0), 0);
+      encodedBytes!.setRange(
+          1 + lengthAsBytes.length, encodedBytes!.length, valueBytes!, 0);
     }
     return encodedBytes!;
   }
